@@ -5,7 +5,10 @@
  */
 package majorprogramfighter;
 
+import javafx.animation.AnimationTimer;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -19,15 +22,17 @@ public class FightingMechanics extends HBox{
     private static Rectangle playerHealth;
     private static Rectangle cpuHealth;
     private static int originalHealth;
-    private static Label timer;
+    private static TextField timer;
+    private CountDown countDown;
     int timerValue;
     
     public FightingMechanics(FightingStage fightingStage, GameInterface gameInterface){
         timerValue = 99;
-        timer = new Label();
-        timer.setPrefWidth(originalHealth);
+        timer = new TextField();
+        timer.setAlignment(Pos.CENTER);
+        timer.setFocusTraversable(false);
         timer.setText(Integer.toString(timerValue));
-        originalHealth=150;
+        originalHealth=400;
         this.gameInterface = gameInterface;
         playerHealth = new Rectangle(originalHealth,30);
         playerHealth.setFocusTraversable(false);
@@ -39,6 +44,7 @@ public class FightingMechanics extends HBox{
         this.getChildren().addAll(playerHealth,timer,cpuHealth);
         this.setSpacing(150);
         gameInterface.setTop(this);
+        countDown=new CountDown();
     }
     
     public static void attackTheEnenmy(Assets playerControlledFighter, Assets computerControlledFighter, Rectangle playerDamage){
@@ -59,4 +65,25 @@ public class FightingMechanics extends HBox{
         this.playerHealth.setWidth(originalHealth);
         this.cpuHealth.setWidth(originalHealth);
     }  
+    
+    public void startCountDown(){
+        countDown.start();
+    }
+    
+    private class CountDown extends AnimationTimer{
+        long countPrevious=0;
+        @Override
+        public void handle(long now) {
+            if(countPrevious==0){
+                countPrevious=now;
+            }
+            if(now-countPrevious>1000000000){
+                timerValue--;
+                timer.setText(Integer.toString(timerValue));
+                countPrevious=now;
+            }
+        }
+        
+    }
+    
 }

@@ -34,8 +34,10 @@ public class ComputerControlledFighter extends Assets{
         viewRectangle2D = new Rectangle2D(234,63,43,80);
         this.setViewport(viewRectangle2D);
         originalPosition = (getParentWidth()/2-getBoundsInParent().getWidth())+100;
+        this.setScaleX(2);
+        this.setScaleY(2);
         setX(originalPosition);
-        setY(getParentHeight()-getBoundsInParent().getHeight());
+        setY(getParentHeight()-getBoundsInParent().getHeight()-40);
     }
     
     public double getOriginalPosition(){

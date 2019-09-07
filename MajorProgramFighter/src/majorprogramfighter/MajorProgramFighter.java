@@ -23,7 +23,7 @@ public class MajorProgramFighter extends Application {
     public void start(Stage primaryStage) {
         GameInterface gameInterface = new GameInterface();
         
-        Scene scene = new Scene(gameInterface, 600, 560);
+        Scene scene = new Scene(gameInterface, 1200, 920);
         
         primaryStage.setTitle("Fighting Game");
         primaryStage.setScene(scene);

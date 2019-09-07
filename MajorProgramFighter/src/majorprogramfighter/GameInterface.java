@@ -27,8 +27,8 @@ public class GameInterface extends BorderPane{
     private FighterAnimation fighterAnimation;
     private FightingMechanics fightingMechanics;
     private ControlPanel controlPanel;
-    private Rectangle cpuHealth;
-    private Rectangle playerHealth;
+        private Rectangle cpuHealth;
+        private Rectangle playerHealth;
     
     public GameInterface(){
         fightingStage = new FightingStage(this);
@@ -50,6 +50,7 @@ public class GameInterface extends BorderPane{
             public void handle(ActionEvent event) {
                 getPlayerControlledFighter().setOnKeyPressed(keyEvent);
                 fighterAnimation.start();
+                fightingMechanics.startCountDown();
             }
         });
         

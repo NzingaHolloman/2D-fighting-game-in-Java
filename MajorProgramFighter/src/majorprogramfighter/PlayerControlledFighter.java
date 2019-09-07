@@ -33,8 +33,10 @@ public class PlayerControlledFighter extends Assets{
         viewRectangle2D = new Rectangle2D(0,125,59,86);
         this.setViewport(viewRectangle2D);
         originalPosition=(getParentWidth()/2-getBoundsInParent().getWidth())-100;
+        this.setScaleX(2);
+        this.setScaleY(2);
         setX(originalPosition);
-        setY(getParentHeight()-getBoundsInParent().getHeight());
+        setY(getParentHeight()-getBoundsInParent().getHeight()-40);
     }
     
     public void fight(){

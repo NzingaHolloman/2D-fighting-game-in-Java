@@ -24,8 +24,8 @@ public class FightingStage extends Pane{
     private Background trueBackground;
     
     public FightingStage(GameInterface gameInterface){
-        this.setPrefWidth(600);
-        this.setPrefHeight(500);
+        this.setPrefWidth(1200);
+        this.setPrefHeight(920);
         
         try{
             String fileName = "Assets/BackgroundAsset1.png";
