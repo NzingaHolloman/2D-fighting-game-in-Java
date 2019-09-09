@@ -22,12 +22,14 @@ public class FightingMechanics extends HBox{
     private static Rectangle playerHealth;
     private static Rectangle cpuHealth;
     private static int originalHealth;
+    private static int originalTimer;
     private static TextField timer;
     private CountDown countDown;
     int timerValue;
     
     public FightingMechanics(FightingStage fightingStage, GameInterface gameInterface){
-        timerValue = 99;
+        originalTimer =99;
+        timerValue = originalTimer;
         timer = new TextField();
         timer.setAlignment(Pos.CENTER);
         timer.setFocusTraversable(false);
@@ -60,7 +62,6 @@ public class FightingMechanics extends HBox{
     public Rectangle getCPUHealth(){
         return cpuHealth;
     }
-    
     public void resetHealth(){
         this.playerHealth.setWidth(originalHealth);
         this.cpuHealth.setWidth(originalHealth);
@@ -68,6 +69,16 @@ public class FightingMechanics extends HBox{
     
     public void startCountDown(){
         countDown.start();
+    }
+    public void stopCountDown(){
+        countDown.stop();
+    }
+    public void resetTimer(){
+        this.timerValue=originalTimer+1;
+    }
+    
+    public int getTimerValue(){
+        return timerValue;
     }
     
     private class CountDown extends AnimationTimer{

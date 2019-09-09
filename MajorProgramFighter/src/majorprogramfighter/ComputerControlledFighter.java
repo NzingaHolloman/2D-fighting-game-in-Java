@@ -21,7 +21,7 @@ public class ComputerControlledFighter extends Assets{
     private int attack;
     
     public ComputerControlledFighter(FightingStage fightingStage){
-        super(10.0,0.0,0.0,fightingStage.getPrefWidth(),fightingStage.getPrefHeight());
+        super(40.0,0.0,0.0,fightingStage.getPrefWidth(),fightingStage.getPrefHeight());
         try {
             String fileLocation = "Assets/VegetaAssets.gif";//name of the file holding the fighter image
             fighter = new Image(new FileInputStream(fileLocation));//saves the fighter image to the fighter variable

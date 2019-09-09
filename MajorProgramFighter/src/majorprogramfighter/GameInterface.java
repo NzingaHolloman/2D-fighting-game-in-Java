@@ -25,10 +25,13 @@ public class GameInterface extends BorderPane{
     private FightingStage fightingStage;
     private gameInterfaceHandler keyEvent;
     private FighterAnimation fighterAnimation;
+    private CPUMove cPUMove;
+    private CPUFight cPUFight;
+    private CPUReset cPUReset;
     private FightingMechanics fightingMechanics;
     private ControlPanel controlPanel;
-        private Rectangle cpuHealth;
-        private Rectangle playerHealth;
+    private Rectangle cpuHealth;
+    private Rectangle playerHealth;
     
     public GameInterface(){
         fightingStage = new FightingStage(this);
@@ -36,12 +39,14 @@ public class GameInterface extends BorderPane{
         CPUFighter = new ComputerControlledFighter(fightingStage);
         keyEvent = new gameInterfaceHandler();
         fighterAnimation = new FighterAnimation();
+        cPUMove = new CPUMove();
+        cPUFight = new CPUFight();
+        cPUReset = new CPUReset();
         fightingMechanics = new FightingMechanics(fightingStage,this);
         controlPanel = new ControlPanel(this);
         cpuHealth =fightingMechanics.getCPUHealth();
         playerHealth=fightingMechanics.getPlayerHealth();
         
-        AddFunctionality();
         ButtonFTN();
     }
        public void ButtonFTN(){
@@ -50,6 +55,9 @@ public class GameInterface extends BorderPane{
             public void handle(ActionEvent event) {
                 getPlayerControlledFighter().setOnKeyPressed(keyEvent);
                 fighterAnimation.start();
+                cPUMove.start();
+                cPUFight.start();
+                cPUReset.start();
                 fightingMechanics.startCountDown();
             }
         });
@@ -58,8 +66,13 @@ public class GameInterface extends BorderPane{
             @Override
             public void handle(ActionEvent event) {
                USERFighter.setX(USERFighter.getOriginalPosition());
+               USERFighter.verifyFighter();
                CPUFighter.setX(CPUFighter.getOriginalPosition());
+               CPUFighter.verifyFighter();
                fightingMechanics.resetHealth();
+               fightingMechanics.stopCountDown();
+               fightingMechanics.resetTimer();
+               fighterAnimation.stop();
             }
         });
         
@@ -68,6 +81,7 @@ public class GameInterface extends BorderPane{
             public void handle(ActionEvent event) {
                 USERFighter.setSpeed(0.0);
                 CPUFighter.setSpeed(0.0);
+                fightingMechanics.stopCountDown();
                 fighterAnimation.stop();
                 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -88,15 +102,34 @@ public class GameInterface extends BorderPane{
             }
         });
     }
-       
-    
-    public void AddFunctionality(){
-       
-    }
     
     public void gameOver(){
         if((cpuHealth.getWidth() < 1)||(playerHealth.getWidth()<1)){
-            System.exit(-1);
+            fighterAnimation.stop();
+            if(cpuHealth.getWidth() < playerHealth.getWidth()){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Player Wins!");
+                alert.setHeaderText("Congradulations!");
+                alert.setContentText("Click OK to exit the game or reset the game!");
+                alert.show();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Player Loses!");
+                alert.setHeaderText("Good luck next time");
+                alert.setContentText("Click OK to exit the game and Cancel to be able to reset!");
+                alert.show();
+            }
+        }
+        
+        if(fightingMechanics.getTimerValue()<=0){
+            fighterAnimation.stop();
+            fightingMechanics.stopCountDown();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Time is up!");    
+            alert.setHeaderText("Defeat your enemy within the given time!");    
+            alert.setContentText("Click OK to exit the game or reset the game!");
+            alert.show();
         }
     }
     
@@ -115,35 +148,67 @@ public class GameInterface extends BorderPane{
                     break;
                 case SPACE:
                     USERFighter.fight();
-                    fightingMechanics.attackTheEnenmy(USERFighter,CPUFighter,playerHealth);
-                    gameOver();
+                    fightingMechanics.attackTheEnenmy(USERFighter,CPUFighter,cpuHealth);
                     break;
             }
         }   
     }
     
     private class FighterAnimation extends AnimationTimer{
-        long previous = 0;
-        long enemyPrevious =0;
+        long playerPrevious = 0;
         @Override
         public void handle(long now) {
-            if((previous==0)){
-                previous=now;
+            if((playerPrevious==0)){
+                playerPrevious=now;
             }
-            else if((now-previous) > 310000000){
+          
+            else if((int)(now-playerPrevious)/(1e9) > 0.75){
                 USERFighter.verifyFighter();
-                previous=now;
+                gameOver();
+                playerPrevious=now;
             } 
-            else if((now-enemyPrevious) > 990000000){
-                CPUFighter.verifyFighter();
-                enemyPrevious=now;
+        }
+    }
+    
+    private class CPUMove extends AnimationTimer{
+        long move=0;
+        @Override
+        public void handle(long now) {
+            if(move==0){
+                move=now;
             }
-            else if((now-enemyPrevious)> 720000000){
+            else if((int)(now-move)/(1e9)>1){
+                CPUFighter.movement();
+                move=now;
+            }
+        } 
+    }
+    
+    private class CPUFight extends AnimationTimer{
+        long fight=0;
+        @Override
+        public void handle(long now) {
+            if(fight==0){
+                fight=now;
+            }
+            else if((int)(now-fight)/(1e9)>2){
                 CPUFighter.performAttack();
                 fightingMechanics.attackTheEnenmy(CPUFighter,USERFighter,playerHealth);
+                fight=now;
             }
-            else if((now-enemyPrevious)>520000000){
-                CPUFighter.movement();
+        }
+    }
+    
+    private class CPUReset extends AnimationTimer{
+        long reset=0;
+        @Override
+        public void handle(long now) {
+            if(reset==0){
+                reset=now;
+            }
+            else if((int)((now-reset)/(1e9))>2.5){
+                CPUFighter.verifyFighter();
+                reset=now;
             }
         }
     }
