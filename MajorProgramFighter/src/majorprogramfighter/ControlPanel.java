@@ -32,7 +32,7 @@ public class ControlPanel extends HBox{
         
         this.setStyle("-fx-background-color: #000000;");//set the background color of pane
         this.getChildren().addAll(startGame,restartGame,exitGame);//adds buttons to HBox
-        this.setSpacing(120);//sets spacing between buttons
+        this.setSpacing(378);//sets spacing between buttons
         gameInterface.setBottom(this);//adds HBox to game pane
     }
     

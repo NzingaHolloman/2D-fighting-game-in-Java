@@ -9,7 +9,7 @@ import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -17,13 +17,16 @@ import javafx.scene.shape.Rectangle;
  *
  * @author wedun
  */
-public class FightingMechanics extends HBox{
+public class FightingMechanics extends GridPane{
     private static GameInterface gameInterface;
+    private FightingStage fightingStage;
     private static Rectangle playerHealth;
     private static Rectangle cpuHealth;
     private static int originalHealth;
     private static int originalTimer;
     private static TextField timer;
+    private static Label playerName;
+    private static Label cpuName;
     private CountDown countDown;
     int timerValue;
     
@@ -42,18 +45,33 @@ public class FightingMechanics extends HBox{
         cpuHealth = new Rectangle (originalHealth,30);
         cpuHealth.setFocusTraversable(false);
         cpuHealth.setFill(Color.BLACK);
-        
-        this.getChildren().addAll(playerHealth,timer,cpuHealth);
-        this.setSpacing(150);
+        playerName = new Label("Broly");
+        cpuName = new Label("Vegeta");
+       
+        this.add(playerName,0,0);
+        this.add(playerHealth,0,1);
+        this.add(timer,1,0);
+        this.add(cpuName,2,0);
+        this.add(cpuHealth,2,1);
+        this.setHgap(120);
         gameInterface.setTop(this);
         countDown=new CountDown();
+        this.fightingStage=fightingStage;
     }
     
     public static void attackTheEnenmy(Assets playerControlledFighter, Assets computerControlledFighter, Rectangle playerDamage){
         if(playerControlledFighter.getBoundsInParent().intersects(computerControlledFighter.getBoundsInParent())){
             playerDamage.setWidth(playerDamage.getWidth()-10);
         }
-        
+    }
+    
+    public void tooClose(Assets playControlledFighter, Assets computerControlledFighter){
+        if(playControlledFighter.getBoundsInParent().intersects(computerControlledFighter.getBoundsInParent())){
+            playControlledFighter.setX(0);
+            //playControlledFighter.setX(playControlledFighter.getX()-20*(playControlledFighter.getFitWidth()));
+            computerControlledFighter.setX(fightingStage.getPrefWidth()-200);
+            //computerControlledFighter.setX(computerControlledFighter.getX()-2*(computerControlledFighter.getFitWidth()));
+        }
     }
     
     public Rectangle getPlayerHealth(){

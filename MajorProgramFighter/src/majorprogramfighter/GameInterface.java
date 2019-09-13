@@ -49,15 +49,26 @@ public class GameInterface extends BorderPane{
         
         ButtonFTN();
     }
+    
+        public void cpuStart(){
+        cPUMove.start();
+        cPUFight.start();
+        cPUReset.start();
+    }
+    public void cpuStop(){
+        cPUMove.stop();
+        cPUFight.stop();
+        cPUReset.stop();
+    }
+    
        public void ButtonFTN(){
         controlPanel.getStartGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                USERFighter.setSpeed(10.0);
                 getPlayerControlledFighter().setOnKeyPressed(keyEvent);
                 fighterAnimation.start();
-                cPUMove.start();
-                cPUFight.start();
-                cPUReset.start();
+                cpuStart();
                 fightingMechanics.startCountDown();
             }
         });
@@ -65,6 +76,8 @@ public class GameInterface extends BorderPane{
         controlPanel.getRestartButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+               cpuStop();
+               USERFighter.setSpeed(0.0);
                USERFighter.setX(USERFighter.getOriginalPosition());
                USERFighter.verifyFighter();
                CPUFighter.setX(CPUFighter.getOriginalPosition());
@@ -79,6 +92,7 @@ public class GameInterface extends BorderPane{
         controlPanel.getExitGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                cpuStop();
                 USERFighter.setSpeed(0.0);
                 CPUFighter.setSpeed(0.0);
                 fightingMechanics.stopCountDown();
@@ -102,9 +116,11 @@ public class GameInterface extends BorderPane{
             }
         });
     }
-    
+       
     public void gameOver(){
         if((cpuHealth.getWidth() < 1)||(playerHealth.getWidth()<1)){
+            cpuStop();
+            fightingMechanics.stopCountDown();
             fighterAnimation.stop();
             if(cpuHealth.getWidth() < playerHealth.getWidth()){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -123,8 +139,9 @@ public class GameInterface extends BorderPane{
         }
         
         if(fightingMechanics.getTimerValue()<=0){
-            fighterAnimation.stop();
+            cpuStop();
             fightingMechanics.stopCountDown();
+            fighterAnimation.stop();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Time is up!");    
             alert.setHeaderText("Defeat your enemy within the given time!");    
@@ -145,6 +162,7 @@ public class GameInterface extends BorderPane{
                 case RIGHT:
                     USERFighter.setDirection(0.0);
                     USERFighter.move();
+                    //fightingMechanics.tooClose(USERFighter,CPUFighter);
                     break;
                 case SPACE:
                     USERFighter.fight();
@@ -179,6 +197,7 @@ public class GameInterface extends BorderPane{
             }
             else if((int)(now-move)/(1e9)>1){
                 CPUFighter.movement();
+                //fightingMechanics.tooClose(USERFighter,CPUFighter);
                 move=now;
             }
         } 
@@ -194,6 +213,7 @@ public class GameInterface extends BorderPane{
             else if((int)(now-fight)/(1e9)>2){
                 CPUFighter.performAttack();
                 fightingMechanics.attackTheEnenmy(CPUFighter,USERFighter,playerHealth);
+                gameOver();
                 fight=now;
             }
         }
