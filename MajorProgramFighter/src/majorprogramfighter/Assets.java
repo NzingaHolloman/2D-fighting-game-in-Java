@@ -15,8 +15,8 @@ public class Assets extends ImageView implements Animation{
     private double speed;//determines how fast the fighter can move left and right
     private double direction;//determines the direction the fighter will move in
     private double power;//determines how much of the health bar each attack takes
-    private double parentWidth;//gets the size of the fighting arena
-    private double parentHeight;
+    private double parentWidth;//gets the width of the fighting arena
+    private double parentHeight;//gets the height of the fighting arena
     
     public Assets(){
         speed=0.0;

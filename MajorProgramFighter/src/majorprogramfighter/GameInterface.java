@@ -162,7 +162,7 @@ public class GameInterface extends BorderPane{
                 case RIGHT:
                     USERFighter.setDirection(0.0);
                     USERFighter.move();
-                    //fightingMechanics.tooClose(USERFighter,CPUFighter);
+                    fightingMechanics.tooClose(USERFighter,CPUFighter);
                     break;
                 case SPACE:
                     USERFighter.fight();
@@ -197,7 +197,7 @@ public class GameInterface extends BorderPane{
             }
             else if((int)(now-move)/(1e9)>1){
                 CPUFighter.movement();
-                //fightingMechanics.tooClose(USERFighter,CPUFighter);
+                fightingMechanics.tooClose(USERFighter,CPUFighter);
                 move=now;
             }
         } 

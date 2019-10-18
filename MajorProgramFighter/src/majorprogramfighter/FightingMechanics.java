@@ -28,21 +28,23 @@ public class FightingMechanics extends GridPane{
     private static Label playerName;
     private static Label cpuName;
     private CountDown countDown;
-    int timerValue;
+    private int timerValue;
     
     public FightingMechanics(FightingStage fightingStage, GameInterface gameInterface){
-        originalTimer =99;
+        //originalTimer =99;
+        originalTimer = 5;
         timerValue = originalTimer;
         timer = new TextField();
         timer.setAlignment(Pos.CENTER);
         timer.setFocusTraversable(false);
         timer.setText(Integer.toString(timerValue));
-        originalHealth=400;
+        //originalHealth=400;
+        originalHealth = 1;
         this.gameInterface = gameInterface;
-        playerHealth = new Rectangle(originalHealth,30);
+        playerHealth = new Rectangle(0,0,originalHealth,30);
         playerHealth.setFocusTraversable(false);
         playerHealth.setFill(Color.BLUE);
-        cpuHealth = new Rectangle (originalHealth,30);
+        cpuHealth = new Rectangle (originalHealth,0,originalHealth,30);
         cpuHealth.setFocusTraversable(false);
         cpuHealth.setFill(Color.BLACK);
         playerName = new Label("Broly");
@@ -65,12 +67,10 @@ public class FightingMechanics extends GridPane{
         }
     }
     
-    public void tooClose(Assets playControlledFighter, Assets computerControlledFighter){
+    public void tooClose(Assets playControlledFighter, Assets computerControlledFighter){//prevent fighters from passing through each other
         if(playControlledFighter.getBoundsInParent().intersects(computerControlledFighter.getBoundsInParent())){
-            playControlledFighter.setX(0);
-            //playControlledFighter.setX(playControlledFighter.getX()-20*(playControlledFighter.getFitWidth()));
-            computerControlledFighter.setX(fightingStage.getPrefWidth()-200);
-            //computerControlledFighter.setX(computerControlledFighter.getX()-2*(computerControlledFighter.getFitWidth()));
+            playControlledFighter.setX(playControlledFighter.getX()-10);
+            computerControlledFighter.setX(computerControlledFighter.getX()+10);
         }
     }
     
