@@ -24,7 +24,7 @@ Feel free to use any background image you like
 
 The GameInterface class is a **BorderPane** where all the elements come together. The fighters are on the stage, the stage is on the game interface. The buttons to start, restart, and exit the game on the game interface, the status, including the players health and time remaining, are also on the game interface.
 ![Game Interface UML](https://github.com/wedunsto/Major-Project-3-Fall-2019/blob/master/GameInterfaceUMLUpdated.PNG)\
-AnimationTimers work to control certain movements and the combat action of players\
+AnimationTimers work to control certain movements and the combat action of players
 
 The ControlPanel class is a **Hbox** where the button to start, restart, and exit the game are created. This can be implemented in **many ways**\
 ![Control Panel UML](https://github.com/wedunsto/Major-Project-3-Fall-2019/blob/master/ControlPanelUMLUpdated.PNG)
