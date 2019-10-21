@@ -34,7 +34,7 @@ This is where the results of combat are analyzed. This is where:\
   The health is decremented when a player is hit\
   The time left is evaluated\
   Combat is registered\
-![Fighting Mechanics UML](https://github.com/wedunsto/Major-Project-3-Fall-2019/blob/master/FightingMechanicsUMLUpdated.PNG) \
+![Fighting Mechanics UML](https://github.com/wedunsto/Major-Project-3-Fall-2019/blob/master/FightingMechanicsUMLUpdated.PNG) 
 
 Remember : Nodes go on panes, panes go on scenes, scenes go on stages.
 
