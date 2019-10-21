@@ -15,12 +15,12 @@ The Asset class contains properties that fighters contain, such as speed, direct
 The Fighter class can be implemented in **many ways**\
 This is where properties such as sprites, different viewports for animation, and the move() method is overwritten\
 ![Fighters UML](https://github.com/wedunsto/Major-Project-3-Fall-2019/blob/master/FightersUMLUpdated.PNG)\
-Feel free to use any sprite sheet (google image search 'sprite sheet')\
+Feel free to use any sprite sheet (google image search 'sprite sheet')
 
 The FightingStage class is a **Pane** where the fighting stage background is imported.\
 Utilize this class' constructor to import the fighting stage onto the GameInterface\
 ![Fighting Stage UML](https://github.com/wedunsto/Major-Project-3-Fall-2019/blob/master/FightingStageUMLUpdated.PNG)\
-Feel free to use any background image you like \
+Feel free to use any background image you like 
 
 The GameInterface class is a **BorderPane** where all the elements come together. The fighters are on the stage, the stage is on the game interface. The buttons to start, restart, and exit the game on the game interface, the status, including the players health and time remaining, are also on the game interface.
 ![Game Interface UML](https://github.com/wedunsto/Major-Project-3-Fall-2019/blob/master/GameInterfaceUMLUpdated.PNG)\
@@ -61,6 +61,5 @@ Level 6: Implement a method that wil detect when an attack has landed on a playe
 \
 Level 7: Implement a method that will detect when the game is over. The conditions for a game over include: \
 The player's health has reached 0 \
-The CPU's health has reached 0
-\ 
+The CPU's health has reached 0\ 
 The timer has run out of time.
