@@ -12,6 +12,12 @@ This method will be overwritten, and provide instruction on how to move fighters
 The Asset class extends the ImageView class and implements the Animation interfaces. It contains properties that fighters contain, such as speed, direction, and power\
 ![Asset UML](https://github.com/wedunsto/Major-Project-3-Fall-2019/blob/master/AssetUMLUpdated.PNG)
 
+direction is in degrees. Example:\
+double newX = this.getX() + getSpeed() * Math.cos(Math.toRadians(getDirection()) );\
+double newY = this.getY() + getSpeed() * Math.sin(Math.toRadians(getDirection()) ;\
+this.setX( newX );\
+this.setY( newY );\
+\
 The Fighter class can be implemented in **many ways**\
 This is where properties such as sprites, different viewports for animation, and the move() method is overwritten\
 ![Fighters UML](https://github.com/wedunsto/Major-Project-3-Fall-2019/blob/master/FightersUMLUpdated.PNG)\
@@ -43,26 +49,28 @@ Remember : Nodes go on panes, panes go on scenes, scenes go on stages.
 
 ## Breakdown: ##
 
-Level 1: Create the FightingStage and GameInterface classes. Import your background image and set the dimensions of your pane. At this level your empty fighting stage should display.
+Level 1: Create the FightingStage and GameInterface classes. Import your background image and set the dimensions of your pane. At this level your empty fighting stage should display.(14 points)
 \
 \
 Level 2: Create the Asset and Animation classes. These will be used to animate your fighters.\
-Create **your** Fighter(s) class(es). Add your fighters to your fighting stage. At this level, your fighting stage should contain your static fighters.
+Create **your** Fighter(s) class(es). Add your fighters to your fighting stage. At this level, your fighting stage should contain your static fighters.(14 points)
 \
 \
-Level 3: Create the ControlPanel class. Add your start, restart, and exit buttons to your game interface. At this level your game interface should have a fighting stage with two fighters, and the buttons to start, restart, and exit the game.
+Level 3: Create the ControlPanel class. Add your start, restart, and exit buttons to your game interface. At this level your game interface should have a fighting stage with two fighters, and the buttons to start, restart, and exit the game.(14 points)
 \
 \
-Level 4: In your GameInterface class. Utilize a KeyEventHandler to animate the character the player will control. At this level you should have a moving character that can attack.
+Level 4: In your GameInterface class. Utilize a KeyEventHandler to animate the character the player will control. At this level you should have a moving character that can attack.(14 points)
 \
 \
-Level 5: Animate the second character, such that it can move and attack without a KeyEventHandler. Create the FightingMechanics class. At this level both characters should be able to move and attack. The health bars and timers should be added to the game interface.
+Level 5: Animate the second character, such that it can move and attack without a KeyEventHandler. Create the FightingMechanics class. At this level both characters should be able to move and attack. The health bars and timers should be added to the game interface.(14 points)
 \
 \
-Level 6: Implement a method that wil detect when an attack has landed on a player. There are **many ways** to do this. At this level, when a player is attacked, their health bar should decrease.
+Level 6: Implement a method that wil detect when an attack has landed on a player. There are **many ways** to do this. At this level, when a player is attacked, their health bar should decrease.(14 points)
 \
 \
-Level 7: Implement a method that will detect when the game is over. The conditions for a game over include: \
+Level 7: Implement a method that will detect when the game is over. The conditions for a game over include: \(16 points)
 The player's health has reached 0 \
 The CPU's health has reached 0\ 
 The timer has run out of time.
+
+Extra credit: Add music to the program when the start button is pushed. (Student submitted: 10 points)
