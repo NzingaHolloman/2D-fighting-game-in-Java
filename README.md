@@ -3,11 +3,11 @@ Design a 2D fighting game in Java
 
 ### **CAUTION : This is not an exhaustive flow chart. These are not exhaustive UMLs. You may need to implement additional class and methods!**
 
-![Project UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master/Diagrams/AnimationUML.PNG)
+![Project UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master/Diagrams/ProjectUMLUpdated.PNG)
 
 The Animation interface contains a method 'move()' that a class can implement.\
 This method will be overwritten, and provide instruction on how to move fighters\
-![Animation UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master/AnimationUMLUpdated.PNG)
+![Animation UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master/Diagrams/AnimationUML.PNG)
 
 The Asset class extends the ImageView class and implements the Animation interfaces. It contains properties that fighters contain, such as speed, direction, and power\
 ![Asset UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master/Diagrams/AnimationUMLUpdated.PNG)
