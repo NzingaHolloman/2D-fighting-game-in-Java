@@ -14,14 +14,18 @@ import javafx.scene.layout.Pane;
  * @author nzing
  */
 public  class GameInterface extends BorderPane {
-    //private Fighter fighters;
+    private Fighter fighters;
+    private FighterCPU cpu;
     private FightingStage fightingStage;
+    //include alll animation Timers
     
     public GameInterface() throws FileNotFoundException{
         this.fightingStage = new FightingStage(this);
-        this.setBackground(fightingStage.returnBackground());
-        //this.setCenter(fightingStage);
-        this.setBackground(fightingStage.getBackground());
+        //this.setBackground(fightingStage.returnBackground());
+        this.setCenter(fightingStage);
+        //this.setBackground(fightingStage.getBackground());
+        this.fighters = new Fighter(fightingStage);
+        this.cpu = new FighterCPU(fightingStage);
     }
     public void GameOver() {
         
