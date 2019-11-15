@@ -23,8 +23,13 @@ public class FighterCPU extends Assets {
         viewRectangle2D2 = new Rectangle2D(1571,0,1731,245);
         this.setViewport(viewRectangle2D2);
         this.setLayoutX(540);
-        this.setLayoutY(260);
+        this.setLayoutY(255);
         fightingStage.getChildren().add(this);
     }
-    
+    public void Fight(){
+        
+    }
+    public void Move(){
+        
+    }
 }

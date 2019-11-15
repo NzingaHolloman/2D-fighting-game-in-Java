@@ -14,7 +14,6 @@ import javafx.scene.image.Image;
  */
 public class Fighter extends Assets {
     private final Image fighter1;
-    //private final Image fighter2;
     private Rectangle2D viewRectangle2D;
     private Rectangle2D viewRectangle2D2;
     
@@ -24,17 +23,10 @@ public class Fighter extends Assets {
         viewRectangle2D = new Rectangle2D(0,0,165,193);
         this.setViewport(viewRectangle2D);
         this.setLayoutX(120);
-        this.setLayoutY(305);
+        this.setLayoutY(295);
         fightingStage.getChildren().add(this);
         
-//        fighter2 =new Image("file:Image2.png");
-//        this.setImage(fighter2);
-//        viewRectangle2D2 = new Rectangle2D(1571,0,1731,245);
-//        this.setViewport(viewRectangle2D2);
-//        this.setLayoutX(540);
-//        this.setLayoutY(260);
-//        fightingStage.getChildren().add(this);
-        
+     
     }
     public void Fight(){
         
