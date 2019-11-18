@@ -44,7 +44,7 @@ public class FightingStage extends Pane{
             background = new Background(backgroundimage);
             
             this.setBackground(background);
-            this.setPrefSize(900, 550);
+            this.setPrefSize(900, 590);
     }
 
     /**

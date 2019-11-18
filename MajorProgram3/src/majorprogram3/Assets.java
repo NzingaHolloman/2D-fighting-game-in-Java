@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
  *
  * @author nzing
  */
-public class Assets extends ImageView{
+public class Assets extends ImageView implements Animation{
     private double speed;
     private double direction;
     private double power;
@@ -19,7 +19,11 @@ public class Assets extends ImageView{
     private double parentHeight;
     
     public Assets(){
-        
+        this.speed = 10;
+        this.direction = 0;
+        this.power = 5;
+        this.parentWidth = 900;
+        this.parentHeight = 500;
     }
     public Assets(double speed, double direction, double power, double pWidth, double pHeight){
         this.speed = speed;
@@ -47,6 +51,7 @@ public class Assets extends ImageView{
      * @return the direction
      */
     public double getDirection() {
+        
         return direction;
     }
 
@@ -54,6 +59,7 @@ public class Assets extends ImageView{
      * @param direction the direction to set
      */
     public void setDirection(double direction) {
+        
         this.direction = direction;
     }
 
@@ -97,6 +103,11 @@ public class Assets extends ImageView{
      */
     public void setParentHeight(double parentHeight) {
         this.parentHeight = parentHeight;
+    }
+
+    @Override
+    public void move() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

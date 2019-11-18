@@ -24,8 +24,9 @@ public class NewFXMain extends Application {
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
         GameInterface root = new GameInterface();
-        Scene scene = new Scene(root, 900, 520);
-        
+        Scene scene = new Scene(root, 900, 570);
+        root.setFocusTraversable(true);
+        root.getFighter().requestFocus();
         primaryStage.setTitle("MP3");
         primaryStage.setScene(scene);
         primaryStage.show();

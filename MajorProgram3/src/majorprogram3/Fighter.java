@@ -5,6 +5,7 @@
  */
 package majorprogram3;
 
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
@@ -13,25 +14,40 @@ import javafx.scene.image.Image;
  * @author nzing
  */
 public class Fighter extends Assets {
-    private final Image fighter1;
-    private Rectangle2D viewRectangle2D;
-    private Rectangle2D viewRectangle2D2;
+    private final Image fighter1=new Image("file:Image1.png");
+    private Rectangle2D viewRectangle2D = new Rectangle2D(0,0,165,193);
+    private Rectangle2D viewRectangle2D2 = new Rectangle2D(603,305,288,294);//388,305,603,494
     
     public Fighter(FightingStage fightingStage){
-        fighter1 =new Image("file:Image1.png");
+        //fighter1 =new Image("file:Image1.png");
         this.setImage(fighter1);
         viewRectangle2D = new Rectangle2D(0,0,165,193);
         this.setViewport(viewRectangle2D);
         this.setLayoutX(120);
         this.setLayoutY(295);
         fightingStage.getChildren().add(this);
-        
-     
+
     }
     public void Fight(){
         
-    }
-    public void Move(){
+        this.setViewport(viewRectangle2D2);
+                
+        setDirection(-1);
+        setSpeed(30);
         
+        //move();
+    }
+    @Override
+    public void move(){
+        this.setViewport(viewRectangle2D);     
+        double newX = this.getX() + getSpeed() * getDirection();
+        if(newX<-250){
+            this.setX(-250);
+        }else if(newX>this.getParentHeight()){
+            this.setX(this.getParentHeight());
+            
+        } else {
+        this.setX( newX );
+        }
     }
 }
