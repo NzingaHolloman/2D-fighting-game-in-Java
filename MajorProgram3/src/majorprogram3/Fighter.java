@@ -29,17 +29,33 @@ public class Fighter extends Assets {
 
     }
     public void Fight(){
-        
         this.setViewport(viewRectangle2D2);
-                
+        
+        AnimationTimer timer = new AnimationTimer() {
+            private long previous =0;
+            @Override
+            public void handle(long now) {
+                //System.out.println("g");
+                if(previous ==0){
+                    previous=now;
+                } else if(now -previous >=1e+9 / 2){
+                    SecondImage();
+                    previous=0;
+                }
+            }
+        };
+        timer.start();
+                 
         setDirection(-1);
         setSpeed(30);
         
-        //move();
+    }
+    public void SecondImage(){
+        this.setViewport(viewRectangle2D);
     }
     @Override
     public void move(){
-        this.setViewport(viewRectangle2D);     
+        //this.setViewport(viewRectangle2D);     
         double newX = this.getX() + getSpeed() * getDirection();
         if(newX<-250){
             this.setX(-250);

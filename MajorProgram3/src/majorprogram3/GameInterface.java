@@ -6,7 +6,9 @@
 package majorprogram3;
 
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Timer;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -24,7 +26,8 @@ public  class GameInterface extends BorderPane {
     private FightingStage fightingStage;
     private ControlPanel controlPanel;
     private MoveFighter moveFighter;
-    //include alll animation Timers
+    private FightingMechanic fightingMechanic;
+   
     
     public GameInterface() throws FileNotFoundException{
         
@@ -39,6 +42,10 @@ public  class GameInterface extends BorderPane {
         this.fighters = new Fighter(fightingStage);
         this.cpu = new FighterCPU(fightingStage);
         
+        this.fightingMechanic = new FightingMechanic(fightingStage);
+        this.setTop(fightingMechanic);
+        
+        MoveFighterCPU();
         
         fighters.setOnKeyPressed(moveFighter);
         
@@ -48,7 +55,50 @@ public  class GameInterface extends BorderPane {
         fighters.setTranslateX(120);
                 
     }
-
+    public void MoveFighterCPU(){
+        Random rand  = new Random();
+        
+        AnimationTimer timer = new AnimationTimer() {
+            private long previous =0;
+            int i = 0; int u = 0;int p = 0;
+            @Override
+            public void handle(long now) {
+                int r = rand.nextInt(3);
+                //System.out.println(r);
+                if(r == 0 ){
+                    p++;
+                    if(p>15){
+                    System.out.println("1");
+                    cpu.setDirection(1);
+                    cpu.move();
+                    cpu.move();
+                    now=0;
+                    p=0;
+                    }
+                }else if(r == 2 ){
+                    u++;
+                    if(u>45){
+                    cpu.Fight();
+                    cpu.setDirection(1);
+                    cpu.setSpeed(10);
+                    u=0;
+                    now=0;
+                    }
+                }else if(r == 1 ){
+                    i++;
+                    if(i>15){
+                        System.out.println("1");
+                        cpu.setDirection(-1);
+                        cpu.move();
+                        cpu.move();
+                        cpu.move();           
+                        i=0;
+                    }
+                }
+            }
+        };
+        timer.start();
+    }
     public void GameOver() {
         
     }
@@ -69,15 +119,10 @@ public  class GameInterface extends BorderPane {
                 fighters.setDirection(1);
                 fighters.move();
             }else if(event.getCode() == KeyCode.SPACE){
-                
                 fighters.Fight();
-                //Timer t = new Timer();
-                //t.start();
                 fighters.setDirection(1);
                 fighters.setSpeed(30);
-                //fighters.move();
             }
-            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
         
     }
