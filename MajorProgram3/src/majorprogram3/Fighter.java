@@ -38,7 +38,7 @@ public class Fighter extends Assets {
                 //System.out.println("g");
                 if(previous ==0){
                     previous=now;
-                } else if(now -previous >=1e+9 / 2){
+                } else if(now - previous >=1e+9 / 2){
                     SecondImage();
                     previous=0;
                 }
