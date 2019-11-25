@@ -27,27 +27,30 @@ import javafx.scene.shape.Rectangle;
  * @author nzing
  */
 public  class GameInterface extends BorderPane {
-    private Fighter fighters;
-    private FighterCPU cpu;
+    static Fighter fighters;
+    static FighterCPU cpu;
     private FightingStage fightingStage;
     private ControlPanel controlPanel;
     private MoveFighter moveFighter;
-    private FightingMechanic fightingMechanic;
+    //private FightingMechanic fightingMechanic;
     
     private TextField time = new TextField();
-    private int timerValue;
-    private Label playerName = new Label("Captain America");
+    static int timerValue;
+    private Label playerName;// = new Label("Captain America");
     private Label cpuName = new Label("Black Widow");;
     private VBox vbox = new VBox();
     private VBox vboxCPU = new VBox();
     private VBox vbox2 = new VBox();
     private VBox vboxCPU2 = new VBox();
-    private int red1;
-    private int red2;
+    static int red1;
+    static int red2;
    
     private GridPane FightingMechanic;
-    private Rectangle playerHealth2;
-    private Rectangle cpuHealth2;
+    static Rectangle playerHealth2;
+    static Rectangle cpuHealth2;
+    
+    static AnimationTimer timer;
+    static AnimationTimer timer2;
     
     public GameInterface() throws FileNotFoundException{
         
@@ -61,10 +64,7 @@ public  class GameInterface extends BorderPane {
         moveFighter = new MoveFighter();
         this.fighters = new Fighter(fightingStage);
         this.cpu = new FighterCPU(fightingStage);
-        
-        //this.fightingMechanic = new FightingMechanic(fightingStage);
-        //this.setTop(fightingMechanic);
-        
+                
         MoveFighterCPU();
         
         fighters.setOnKeyPressed(moveFighter);
@@ -74,7 +74,7 @@ public  class GameInterface extends BorderPane {
         cpu.setTranslateX(60);
         fighters.setTranslateX(120);
         
-        
+        playerName = new Label("Captain America");
         
         FightingMechanic = new GridPane();
         red1 = 0;
@@ -111,7 +111,7 @@ public  class GameInterface extends BorderPane {
        
         //time.setPrefColumnCount(15);
         
-        AnimationTimer timer = new AnimationTimer() {
+        timer = new AnimationTimer() {
             //private int 
             private long previous =0;
             @Override
@@ -131,7 +131,7 @@ public  class GameInterface extends BorderPane {
                 }
             }
         };
-        timer.start();
+        timer.stop();
         
         FightingMechanic.add(vbox, 0, 0);
         FightingMechanic.add(vbox2, 0, 0);
@@ -144,8 +144,8 @@ public  class GameInterface extends BorderPane {
     public void MoveFighterCPU(){
         Random rand  = new Random();
         
-        AnimationTimer timer;
-        timer = new AnimationTimer() {
+        
+        timer2 = new AnimationTimer() {
             private long previous =0;
             int i = 0; int u = 0;int p = 0;
             @Override
@@ -172,7 +172,7 @@ public  class GameInterface extends BorderPane {
                             cpu.setSpeed(10);
                             u=0;
                             now=0;
-                            if(fighters.getX()>=cpu.getX()+250){// && fighters.getX()<=cpu.getX()+200){//&& fighters.getX()<=cpu.getX()-290){
+                            if(fighters.getX()>=cpu.getX()+230){// && fighters.getX()<=cpu.getX()+200){//&& fighters.getX()<=cpu.getX()-290){
                                 //System.out.println("this fighting is woking"+ cpu.getX()+200);
                                 //fightingMechanic.setRed2();
                                 setRed1();
@@ -181,13 +181,15 @@ public  class GameInterface extends BorderPane {
                     case 1:
                         i++;
                         if(i>10){
-                            if(fighters.getX()<=cpu.getX()+260){//&& fighters.getX()<=cpu.getX()-290){
+                            if(fighters.getX()<=cpu.getX()+240){//&& fighters.getX()<=cpu.getX()-290){
                                 //System.out.println("this fighting is woking");
                                 cpu.setDirection(-1);
                                 cpu.move();
                                 cpu.move();
                                 cpu.move();
+                                //cpu.move();
                                 i=0;
+                                
                             }
                             
                         }   break;
@@ -196,7 +198,7 @@ public  class GameInterface extends BorderPane {
                 }
             }
         };
-        timer.start();
+        timer2.stop();
     }
     public void GameOver() {
         
@@ -247,11 +249,16 @@ public  class GameInterface extends BorderPane {
      * @param red1 the red1 to set
      */
     public void setRed1() {
-        red1 = red1+10;
+        red1 = red1+20;
         System.out.println(red1);
         if(red1<=400){
             playerHealth2.setWidth(red1);
+        }else{
+            timer.stop();
+            timer2.stop();
+            time.setText("Game Over!\nBlack Widow wins");
         }
+        
         //playerHealth2.setWidth(red1);
     }
 
@@ -266,10 +273,15 @@ public  class GameInterface extends BorderPane {
      * @param red2 the red2 to set
      */
     public void setRed2() {
-        red2 = red2+10;
+        red2 = red2+20;
         System.out.println(red2);
         if(red2<=400){
             cpuHealth2.setWidth(red2);
+        }else{
+            timer.stop();
+            timer2.stop();
+            time.setText("Game Over!");
+            playerName = new Label("Captain America: Winner");
         }
     }
 }
