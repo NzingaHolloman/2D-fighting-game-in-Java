@@ -1,7 +1,7 @@
 # Major-Project-3-Fall-2019
 Design a 2D fighting game in Java
 
-## Breakdown: ##
+## Branch Breakdown: ##
 
 Level 1: Create the FightingStage and GameInterface classes. Import your background image and set the dimensions of your pane. At this level your empty fighting stage should display.(14 points)
 \
