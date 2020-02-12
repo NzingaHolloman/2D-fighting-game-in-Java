@@ -1,52 +1,6 @@
 # Major-Project-3-Fall-2019
 Design a 2D fighting game in Java
 
-### **CAUTION : This is not an exhaustive flow chart. These are not exhaustive UMLs. You may need to implement additional class and methods!**
-
-![Project UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master/Diagrams/ProjectUMLUpdated.PNG)
-
-The Animation interface contains a method 'move()' that a class can implement.\
-This method will be overwritten, and provide instruction on how to move fighters\
-![Animation UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master/Diagrams/AnimationUML.PNG)
-
-The Asset class extends the ImageView class and implements the Animation interfaces. It contains properties that fighters contain, such as speed, direction, and power\
-![Asset UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master/Diagrams/AnimationUMLUpdated.PNG)
-
-direction is in degrees. Example:\
-double newX = this.getX() + getSpeed() * Math.cos(Math.toRadians(getDirection()) );\
-double newY = this.getY() + getSpeed() * Math.sin(Math.toRadians(getDirection()) ;\
-this.setX( newX );\
-this.setY( newY );\
-\
-The Fighter class can be implemented in **many ways**\
-This is where properties such as sprites, different viewports for animation, and the move() method is overwritten\
-![Fighters UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master/Diagrams/FightersUMLUpdated.PNG)\
-Feel free to use any sprite sheet (google image search 'sprite sheet')\
-Use the setViewport(Rectangle2D object) method to isolate individual sprites.
-
-The FightingStage class is a **Pane** where the fighting stage background is imported.\
-Utilize this class' constructor to import the fighting stage onto the GameInterface\
-![Fighting Stage UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master//Diagrams/FightingStageUMLUpdated.PNG)\
-Feel free to use any background image you like\
-set the width and height of the fighting stage in this class
-
-The GameInterface class is a **BorderPane** where all the elements come together. The fighters are on the stage, the stage is on the game interface. The buttons to start, restart, and exit the game on the game interface, the status, including the players health and time remaining, are also on the game interface.
-![Game Interface UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master//Diagrams/GameInterfaceUMLUpdated.PNG)\
-AnimationTimers work to control certain movements and the combat action of players
-
-The ControlPanel class is a **Hbox** where the button to start, restart, and exit the game are created. This can be implemented in **many ways**\
-![Control Panel UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master//Diagrams/ControlPanelUMLUpdated.PNG)
-
-The FightingMechanic class is a **GridPane** that can be implemented in **many ways** \
-This is where the results of combat are analyzed. This is where:\
-  The health is decremented when a player is hit\
-  The time left is evaluated\
-  Combat is registered\
-  Also create a method that prevents fighters from walking through each other.
-![Fighting Mechanics UML](https://github.com/NCATCS/Fall_2019_Major_Program_3/blob/master//Diagrams/FightingMechanicsUMLUpdated.PNG) 
-
-Remember : Nodes go on panes, panes go on scenes, scenes go on stages.
-
 ## Breakdown: ##
 
 Level 1: Create the FightingStage and GameInterface classes. Import your background image and set the dimensions of your pane. At this level your empty fighting stage should display.(14 points)
